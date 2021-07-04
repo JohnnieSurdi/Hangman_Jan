@@ -115,7 +115,7 @@ namespace Hangman_Jan
                 char[] znaki = new char[capital.Length];
 
                 //Console.WriteLine(country+'\n');
-                Console.WriteLine(capital);
+                //Console.WriteLine(capital);
                 //Powitanie 
                 Console.WriteLine("Sprobuj zgadnać to:");
                 //wypelnienie stolicy znakiem _
