@@ -44,35 +44,35 @@ namespace Hangman_Jan
             else if (lifepoints==4)
             {
                  wisielec = @"     /            
-                                  /              ";
+    /              ";
             }
             else if (lifepoints == 3)
             {
-                 wisielec =@"     / \           
-                                /    \          ";
+                 wisielec = @"     / \           
+    /   \          ";
             }
             else if (lifepoints == 2)
             {
                  wisielec = @"         |
-                                       |           
-                                      / \           
-                                    /    \          ";
+         |           
+        / \           
+       /   \          ";
             }
             else if (lifepoints == 1)
             {
                  wisielec = @"          _______
-                                        |            
-                                        |            
-                                       / \           
-                                     /    \          ";
+          |            
+          |            
+         / \           
+        /   \          ";
             }
             else if (lifepoints == 0)
             {
                  wisielec = @"         _______
-                                       |      O     
-                                       |     /|\    
-                                      / \    / \    
-                                    /    \          ";
+         |      O     
+         |     /|\    
+        / \    / \    
+       /   \          ";
             }
             return wisielec;
         }
