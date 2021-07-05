@@ -8,10 +8,10 @@ namespace Hangman_Jan
 {
     class Program
     {
-        static string[] Wczytaniepliku(string sciezka)
+        static string[] Wczytaniepliku(string path)
         {
 
-            string[] countriesandcapitals = System.IO.File.ReadAllLines(sciezka);
+            string[] countriesandcapitals = System.IO.File.ReadAllLines(path);
             return countriesandcapitals;
         }
 
@@ -117,7 +117,7 @@ namespace Hangman_Jan
                 //Console.WriteLine(country+'\n');
                 //Console.WriteLine(capital);
                 //Powitanie 
-                Console.WriteLine("Sprobuj zgadnać to:");
+                Console.WriteLine("Hello! Let's play Hangman!");
                 //wypelnienie stolicy znakiem _
                 for (int i = 0; i < capital.Length; i++)
                 {
@@ -132,7 +132,7 @@ namespace Hangman_Jan
 
                     if (lifepoint==1)
                     {
-                        Console.WriteLine("HINT!");
+                        Console.WriteLine("Maybe this HINT help you!");
                         Console.WriteLine("The capital of " + country);
                     }
 
@@ -141,7 +141,7 @@ namespace Hangman_Jan
                     //zgadywanie pojedynczej litery
                     if (decyzja == "l")
                     {
-                        Console.WriteLine("Wpisz literę");
+                        Console.WriteLine("Type a letter:");
                         char letter = Console.ReadLine().ToCharArray()[0];
                         letter = Char.ToUpper(letter);
                         count = count + 1;
@@ -165,18 +165,18 @@ namespace Hangman_Jan
                             {
                                 stopwatch.Stop();
                                 TimeSpan ts = stopwatch.Elapsed;
-                                Console.WriteLine("wygrales");
+                                Console.WriteLine("You won! Congratulations!");
                                 Console.WriteLine("You guessed the capital after " + count + " letters. It took you" + ts.ToString());
-                                Console.WriteLine("Pozostało " + lifepoint + " zyc");
+                                Console.WriteLine("You have " + lifepoint + " life points");
                                 wygrana = true;
-                                Console.WriteLine("Podaj swoje imie:");
+                                Console.WriteLine("Enter your name:");
                                 imie = Console.ReadLine();
                                 linijkadopliku = DodanieLinijki(imie, DateTime.Now.ToString(), ts.ToString(), count, capital);
                                 using (StreamWriter file = File.AppendText(sciezkazapisu))
                                 {
                                     file.WriteLine(linijkadopliku);
                                 }
-                                Console.WriteLine("Czy chcesz zrestartować y/n");
+                                Console.WriteLine("Do you want to restart and play again? y/n");
                                 char ponownagra = Console.ReadLine().ToCharArray()[0];
                                 if (ponownagra == 'y')
                                 {
@@ -190,7 +190,7 @@ namespace Hangman_Jan
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Wprowadź poprawną decyzję");
+                                    Console.WriteLine("Choose one of the letters! If you want to play - y, and if you don't - n");
                                 }
                             }
                         }
@@ -200,30 +200,30 @@ namespace Hangman_Jan
                             Console.WriteLine(RysowanieWisielca(lifepoint));
                             if (not_in_word.Contains(letter))
                             {
-                                Console.WriteLine("Złe litery:");
+                                Console.WriteLine("You used these incorrect letters:");
                                 not_in_word.ForEach(Console.WriteLine);
-                                Console.WriteLine("Pozostało " + lifepoint + " zyc");
+                                Console.WriteLine("You have " + lifepoint + " life points");
                             }
                             else
                             {
                                 not_in_word.Add(letter);
-                                Console.WriteLine("Złe litery:");
+                                Console.WriteLine("You used these incorrect letters:");
                                 not_in_word.ForEach(Console.WriteLine);
-                                Console.WriteLine("Pozostało " + lifepoint + " zyc");
+                                Console.WriteLine("You have " + lifepoint + " life points");
                             }
                             if (lifepoint==0)
                             {
                                 stopwatch.Stop();
                                 TimeSpan ts = stopwatch.Elapsed;
-                                Console.WriteLine("Przegrales");
-                                Console.WriteLine("Podaj swoje imie:");
+                                Console.WriteLine("Unfortunately You lost!");
+                                Console.WriteLine("Enter your name:");
                                 imie = Console.ReadLine();
                                 linijkadopliku = DodanieLinijki(imie, DateTime.Now.ToString(), ts.ToString(), count, capital);
                                 using (StreamWriter file = File.AppendText(sciezkazapisu))
                                 {
                                     file.WriteLine(linijkadopliku);
                                 }
-                                Console.WriteLine("Czy chcesz zrestartować y/n");
+                                Console.WriteLine("Do you want to restart and play again? y/n");
                                 char ponownagra = Console.ReadLine().ToCharArray()[0];
                                 if (ponownagra == 'y')
                                 {
@@ -237,7 +237,7 @@ namespace Hangman_Jan
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Wprowadź poprawną decyzję");
+                                    Console.WriteLine("Choose one of the letters! If you want to play - y, and if you don't - n");
                                 }
                             }
 
@@ -246,7 +246,7 @@ namespace Hangman_Jan
                     }
                     else if (decyzja == "w" & lifepoint >= 2)
                     {
-                        Console.WriteLine("Wpisz całe rozwiazanie :");
+                        Console.WriteLine("Enter solution: ");
                         string rozwiazanie = Console.ReadLine();
                         rozwiazanie = rozwiazanie.ToUpper();
                         if (capital == rozwiazanie)
@@ -254,17 +254,17 @@ namespace Hangman_Jan
                             wygrana = true;
                             stopwatch.Stop();
                             TimeSpan ts = stopwatch.Elapsed;
-                            Console.WriteLine("wygrales");
+                            Console.WriteLine("You won! Congratulations");
                             Console.WriteLine("You guessed the capital after " + count + " letters. It took you" + ts.ToString());
-                            Console.WriteLine("Podaj swoje imie:");
+                            Console.WriteLine("Enter your name:");
                             imie = Console.ReadLine();
                             linijkadopliku = DodanieLinijki(imie, DateTime.Now.ToString(), ts.ToString(), count, capital);
                             using (StreamWriter file = File.AppendText(sciezkazapisu))
                             {
                                 file.WriteLine(linijkadopliku);
                             }
-                            Console.WriteLine("Pozostało " + lifepoint + " zyc");
-                            Console.WriteLine("Czy chcesz zrestartować y/n");
+                            Console.WriteLine("You have " + lifepoint + " life points");
+                            Console.WriteLine("Do you want to restart and play again? y/n");
                             char ponownagra = Console.ReadLine().ToCharArray()[0];
                             if (ponownagra == 'y')
                             {
@@ -278,27 +278,27 @@ namespace Hangman_Jan
                             }
                             else
                             {
-                                Console.WriteLine("Wprowadź poprawną decyzję");
+                                Console.WriteLine("Choose one of the letters! If you want to play - y, and if you don't - n");
                             }
                         }
                         else
                         {
                             lifepoint = lifepoint - 2;
                             Console.WriteLine(RysowanieWisielca(lifepoint));
-                            Console.WriteLine("Pozostało " + lifepoint + " zyc");
+                            Console.WriteLine("You have " + lifepoint + " life points");
                             if (lifepoint == 0)
                             {
                                 stopwatch.Stop();
                                 TimeSpan ts = stopwatch.Elapsed;
-                                Console.WriteLine("Przegrales");
-                                Console.WriteLine("Podaj swoje imie:");
+                                Console.WriteLine("Unfortunately You lost");
+                                Console.WriteLine("Enter your name:");
                                 imie = Console.ReadLine();
                                 linijkadopliku = DodanieLinijki(imie, DateTime.Now.ToString(), ts.ToString(), count, capital);
                                 using (StreamWriter file = File.AppendText(sciezkazapisu))
                                 {
                                     file.WriteLine(linijkadopliku);
                                 }
-                                Console.WriteLine("Czy chcesz zrestartować y/n");
+                                Console.WriteLine("Do you want to restart and play again? y/n");
                                 char ponownagra = Console.ReadLine().ToCharArray()[0];
                                 if (ponownagra == 'y')
                                 {
@@ -312,7 +312,7 @@ namespace Hangman_Jan
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Wprowadź poprawną decyzję");
+                                    Console.WriteLine("Choose one of the letters! If you want to play - y, and if you don't - n");
                                 }
                             }
                             
@@ -320,7 +320,7 @@ namespace Hangman_Jan
                     }
                     else
                     {
-                        Console.WriteLine("Proszę wpisać l (litera) lub w (slowo) - nie możesz zgadywać ponieważ masz mniej niz 2 życia lub źle wpisałes decyzje");
+                        Console.WriteLine("Choose l and guess a letter or w and guess a solution - You can't guess solution when You have only 1 life point!");
                     }
                 }
             }
